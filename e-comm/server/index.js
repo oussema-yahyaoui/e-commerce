@@ -36,12 +36,15 @@ app.delete("/products/:id", (req, res) => {
 
 app.put("/products/:id", (req, res) => {
 
-   db.query("update products set (name=? image=? description=? price=?) where id=? ", [ req.body.name, req.body.image, req.body.description, req.body.price,req.params.id], (err, results) => {
+   // res.send({ msg: "done" })
+    
+   db.query("update products set name=?, image=?, description=?, price=? where id=? ", [req.body.name, req.body.image, req.body.description, req.body.price, req.params.id], (err, results) => {
 
       if (err) throw err;
       res.send({ msg: "done" })
    })
 });
+
 
 
 
