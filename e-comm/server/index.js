@@ -18,7 +18,10 @@ app.get("/products", (req, res) => {
 });
 
 app.post("/products", (req, res) => {
-   db.query("insert into products (name,image,description,price) values (?,?,?,?) ;", [{ name: req.body.name }, { image: req.body.image }, { description: req.body.description }, { price: req.body.price }], (err, results) => {
+
+   const values = Object.values(req.body);
+   console.log(values);
+   db.query("insert into products (name,image,description,price) values (?,?,?,?) ;", values, (err, results) => {
       if (err) throw err;
       res.send(results)
    })
