@@ -23,9 +23,29 @@ app.post("/products", (req, res) => {
    console.log(values);
    db.query("insert into products (name,image,description,price) values (?,?,?,?) ;", values, (err, results) => {
       if (err) throw err;
-      res.send(results)
+      res.send({ msg: "done" })
    })
 });
+app.delete("/products/:id", (req, res) => {
+
+   db.query("delete from products where id=?;", [req.params.id], (err, results) => {
+      if (err) throw err;
+      res.send({ msg: "done" })
+   })
+});
+
+app.put("/products/:id", (req, res) => {
+
+   db.query("update products set (name=? image=? description=? price=?) where id=? ", [ req.body.name, req.body.image, req.body.description, req.body.price,req.params.id], (err, results) => {
+
+      if (err) throw err;
+      res.send({ msg: "done" })
+   })
+});
+
+
+
+
 
 
 
