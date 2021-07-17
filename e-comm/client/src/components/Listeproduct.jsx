@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import "../Style.css"
 
 
 
@@ -7,10 +8,7 @@ export default class Listeproduct extends React.Component {
     constructor() {
         super();
         this.state = {
-            name: "",
-            image: "",
-            description: "",
-            price: "",
+            products: []
         }
         this.hundlchangename = this.hundlchangename.bind(this);
         this.hundlchangeimage = this.hundlchangeimage.bind(this);
@@ -41,6 +39,15 @@ export default class Listeproduct extends React.Component {
         })
     }
 
+    componentDidMount() {
+        axios.get("/products").then((res) => {
+            this.setState({
+                products: res.data
+            })
+        })
+
+
+    }
 
     hundlClikdel(id) {
         axios.delete("/products/" + id).then((res) => {
@@ -54,18 +61,15 @@ export default class Listeproduct extends React.Component {
         })
     }
 
-
-
-
-
     render() {
         return (
             <div>
                 {
-                    this.props.products.map((product, index) => (
+                    this.state.products.map((product, index) => (
+                        <div className="card">
                         <ul>
-                            <li>
-                                <h4>{product.name}</h4>
+                            <div key={index}>
+                                <h4 >{product.name}</h4>
                                 <img src={product.image} />
                                 <p>{product.description}</p>
                                 <h4>{product.price}</h4>
@@ -73,10 +77,13 @@ export default class Listeproduct extends React.Component {
                                 <input type="text" onChange={this.hundlchangeimage} />
                                 <input type="text" onChange={this.hundlchangedescription} />
                                 <input type="text" onChange={this.hundlchangeprice} />
+                                <div>
                                 <button onClick={() => this.hundlClikdel(product.id)}>delete</button>
                                 <button onClick={() => this.hundlClikup(product.id)}>update</button>
-                            </li>
+                                </div>
+                            </div>
                         </ul>
+                        </div>
                     ))
                 }
             </div>

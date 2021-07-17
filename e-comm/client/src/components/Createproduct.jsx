@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-
-
+import "../Style.css"
 
 export default class Createproduct extends React.Component {
     constructor() {
@@ -45,24 +44,34 @@ export default class Createproduct extends React.Component {
             console.log(res);
         })
     }
+    
 
     render() {
         return (
-            <div>
-                <Router>
-                    <Switch>
+            <div > 
+                <form className="w3-container w3-card-4">
 
+                      <div>
+                        <input type="text" placeholder="name" onChange={this.hundlchangename} />
 
-                        <input type="text" onChange={(e) => this.hundlchangename(e)} />
-                        <input type="text" onChange={(e) => this.hundlchangeimage(e)} />
-                        <input type="text" onChange={(e) => this.hundlchangedescription(e)} />
-                        <input type="text" onChange={(e) => this.hundlchangeprice(e)} />
-                        <button onClick={() => this.hundlClik()}>addproduct</button>
+                      </div>
+                      <div>
 
+                        <input type="text" placeholder="imagr" onChange={this.hundlchangeimage} />
+                      </div>
+                      <div>
+                        <input type="text" placeholder="description" onChange={this.hundlchangedescription} />
 
-                    </Switch>
-                </Router>
+                      </div>
+                      <div>
 
+                        <input type="text"placeholder="price" onChange={this.hundlchangeprice} />
+                      </div>
+                      <div>
+                        <button className="w3-btn w3-blue" onClick={() => this.hundlClik()}>addproduct</button>
+
+                      </div>
+                </form>
             </div>
         )
     }
